@@ -1,6 +1,21 @@
-var city = "Columbus";
-var stateCode = "oh";
 
+
+
+var city = "";
+var stateCode = "";
+
+if(city === null || undefined){
+    city = Columbus;
+} else{
+    city = localStorage.getItem("city");
+}
+console.log(city);
+
+if(stateCode === null || undefined){
+    stateCode = oh;
+} else {
+    stateCode = localStorage.getItem("stateCode");
+}
 
 var currentdayURL = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+stateCode+",us&appid=a4f1da209176afa0326f9cbeeaa0df17"
 
@@ -8,7 +23,17 @@ var forcastByCityName = "http://api.openweathermap.org/data/2.5/forecast?q="+cit
 
 
 
+$("#search").click(function(){
+    
+    var userInput = $("#searchInput").val();
+    console.log(userInput);
+    var queryArray = userInput.split(',');
+    console.log(queryArray);
+    localStorage.setItem("city", queryArray[0]);
+    localStorage.setItem("stateCode", queryArray[1]);
+    
 
+})
 
 
 
@@ -26,13 +51,13 @@ $.ajax({
     $("#cityname").text(cityName);
 
     $("#Today").append("<p id='temp'></p>");
-    $("#temp").text(temp);
+    $("#temp").text("Temp: "+temp);
 
     $("#Today").append("<p id='humidity'></p>");
-    $("#humidity").text(humidity);
+    $("#humidity").text("Humidity: "+humidity+"%");
 
     $("#Today").append("<p id='windSpeed'></p>");
-    $("#windSpeed").text(windSpeed);
+    $("#windSpeed").text("Windspeed :"+windSpeed+"MPH");
 
 })
 
@@ -42,56 +67,77 @@ $.ajax({
     method:"GET"
   }).then(function(response){
   
-    console.log(response);
-    let date = response.list[5].dt_txt;
-    console.log(date);
-    let temp = response.list[5].main.temp;
-    console.log(temp);
-    let humidity =response.list[5].main.humidity;
-    console.log(humidity);
 
-    $("#firstDay").append("<h4 class='date'></h4>");
-    $(".date").text(date);
-    $("#firstDay").append("<p class='tempForcast'></p>");
-    $(".tempForcast").append(temp);
-    $("#firstDay").append("<p class='humidForcast'></p>");
-    $(".humidForcast").append(humidity);
-
-    $("#secondDay").append("<h4 class='date'></h4>");
-    $(".date").text(date);
-    $("#secondDay").append("<p class='tempForcast'></p>");
-    $(".tempForcast").append(temp);
-    $("#secondDay").append("<p class='humidForcast'></p>");
-    $(".humidForcast").append(humidity);
-
-    $("#thirdDay").append("<h4 class='date'></h4>");
-    $(".date").text(date);
-    $("#thirdDay").append("<p class='tempForcast'></p>");
-    $(".tempForcast").append(temp);
-    $("#thirdDay").append("<p class='humidForcast'></p>");
-    $(".humidForcast").append(humidity);
-
-    $("#fourthDay").append("<h4 class='date'></h4>");
-    $(".date").text(date);
-    $("#fourthDay").append("<p class='tempForcast'></p>");
-    $(".tempForcast").append(temp);
-    $("#fourthDay").append("<p class='humidForcast'></p>");
-    $(".humidForcast").append(humidity);
-
-    $("#fithDay").append("<h4 class='date'></h4>");
-    $(".date").text(date);
-    $("#fithDay").append("<p class='tempForcast'></p>");
-    $(".tempForcast").append(temp);
-    $("#fithDay").append("<p class='humidForcast'></p>");
-    $(".humidForcast").append(humidity);
+    function displayForcast(i){
+        date = response.list[i].dt_txt;
+        temp = response.list[i].main.temp;
+        humidity =response.list[i].main.humidity;
+        console.log(response);
+        console.log(date);
+        console.log(temp);
+        console.log(humidity);
     
+      }
 
+    displayForcast(0);
+
+    $("#firstDay").append("<h4 id='date1'></h4>");
+    $("#date1").text(date);
+    $("#firstDay").append("<p id='tempForcast1'></p>");
+    $("#tempForcast1").append("Temp: "+temp);
+    $("#firstDay").append("<p id='humidForcast1'></p>");
+    $("#humidForcast1").append("Humidity: "+humidity+"%");
+
+    displayForcast(8);
+
+    $("#secondDay").append("<h4 id='date2'></h4>");
+    $("#date2").text(date);
+    $("#secondDay").append("<p id='tempForcast2'></p>");
+    $("#tempForcast2").append("Temp: "+temp);
+    $("#secondDay").append("<p id='humidForcast2'></p>");
+    $("#humidForcast2").append("Humidity: "+humidity+"%");
+    
+    displayForcast(17);
+
+    $("#thirdDay").append("<h4 id='date3'></h4>");
+    $("#date3").text(date);
+    $("#thirdDay").append("<p id='tempForcast3'></p>");
+    $("#tempForcast3").append("Temp: "+temp);
+    $("#thirdDay").append("<p id='humidForcast3'></p>");
+    $("#humidForcast3").append("Humidity: "+humidity+"%");
+
+    displayForcast(26);
+
+    $("#fourthDay").append("<h4 id='date4'></h4>");
+    $("#date4").text(date);
+    $("#fourthDay").append("<p id='tempForcast4'></p>");
+    $("#tempForcast4").append("Temp: "+temp);
+    $("#fourthDay").append("<p id='humidForcast4'></p>");
+    $("#humidForcast4").append("Humidity: "+humidity+"%");
+
+    displayForcast(35);
+
+    $("#fithDay").append("<h4 id='date5'></h4>");
+    $("#date5").text(date);
+    $("#fithDay").append("<p id='tempForcast5'></p>");
+    $("#tempForcast5").append("Temp: "+temp);
+    $("#fithDay").append("<p id='humidForcast5'></p>");
+    $("#humidForcast5").append("Humidity: "+humidity+"%");
+    
+    console.log(response);
+    console.log(date);
+    console.log(temp);
+    console.log(humidity);
 
 
   
   })
 
 
-  function displayCurrentDay(){
+  function displayForcast(i){
+    date = response.list[i].dt_txt;
+    temp = response.list[i].main.temp;
+    humidity =response.list[i].main.humidity;
+    
 
   }
