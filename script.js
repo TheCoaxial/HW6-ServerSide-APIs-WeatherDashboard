@@ -91,7 +91,7 @@ $.ajax({
         method:"GET"
       }).then(function(response){
           uvIndex = response.value;
-        console.log(response.value);
+        //console.log(response.value);
         $("#Today").append("<p id='uv'></p>");
         $("#uv").text("UV :"+uvIndex);
         if(response.value < 3){
@@ -127,15 +127,15 @@ $.ajax({
 
         //Logic for adding icons
         if(weather.toString() === "Clouds"){
-            console.log("itClouds");
+            //console.log("itClouds");
             weather = cloud;
         }
         else if(weather.toString() === "Clear"){
-            console.log("itclear");
+           // console.log("itclear");
             weather = sun;
         }
         else if(weather.toString() === "Rain"){
-            console.log("itRain");
+            //console.log("itRain");
             weather = rain;
         }
         else if(weather.toString() === "Snow"){
