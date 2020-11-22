@@ -68,7 +68,7 @@ $.ajax({
     $("#cityname").text(cityName);
 
     $("#Today").append("<p id='temp'></p>");
-    $("#temp").text("Temp: "+temp);
+    $("#temp").text("Temp: "+temp+" °F");
 
     $("#Today").append("<p id='humidity'></p>");
     $("#humidity").text("Humidity: "+humidity+"%");
@@ -83,9 +83,17 @@ $.ajax({
         method:"GET"
       }).then(function(response){
           uvIndex = response.value;
-        console.log(response);
+        console.log(response.value);
         $("#Today").append("<p id='uv'></p>");
         $("#uv").text("UV :"+uvIndex);
+        if(response.value < 3){
+            $("#uv").addClass("mild");
+        } 
+        else if(response.value < 8){
+            $("#uv").addClass("moderate");
+        } else{
+            $("#uv").addClass("severe");
+        }
     })
 
 })
@@ -103,6 +111,7 @@ $.ajax({
 
     function displayForcast(i){
         date = response.list[i].dt_txt;
+        date = date.substring(0,10);
         temp = response.list[i].main.temp;
         humidity =response.list[i].main.humidity;
         // console.log(response);
@@ -117,7 +126,7 @@ $.ajax({
     $("#firstDay").append("<h4 id='date1'></h4>");
     $("#date1").text(date);
     $("#firstDay").append("<p id='tempForcast1'></p>");
-    $("#tempForcast1").append("Temp: "+temp);
+    $("#tempForcast1").append("Temp: "+temp+" °F");
     $("#firstDay").append("<p id='humidForcast1'></p>");
     $("#humidForcast1").append("Humidity: "+humidity+"%");
 
@@ -126,7 +135,7 @@ $.ajax({
     $("#secondDay").append("<h4 id='date2'></h4>");
     $("#date2").text(date);
     $("#secondDay").append("<p id='tempForcast2'></p>");
-    $("#tempForcast2").append("Temp: "+temp);
+    $("#tempForcast2").append("Temp: "+temp+" °F");
     $("#secondDay").append("<p id='humidForcast2'></p>");
     $("#humidForcast2").append("Humidity: "+humidity+"%");
     
@@ -135,7 +144,7 @@ $.ajax({
     $("#thirdDay").append("<h4 id='date3'></h4>");
     $("#date3").text(date);
     $("#thirdDay").append("<p id='tempForcast3'></p>");
-    $("#tempForcast3").append("Temp: "+temp);
+    $("#tempForcast3").append("Temp: "+temp+" °F");
     $("#thirdDay").append("<p id='humidForcast3'></p>");
     $("#humidForcast3").append("Humidity: "+humidity+"%");
 
@@ -144,7 +153,7 @@ $.ajax({
     $("#fourthDay").append("<h4 id='date4'></h4>");
     $("#date4").text(date);
     $("#fourthDay").append("<p id='tempForcast4'></p>");
-    $("#tempForcast4").append("Temp: "+temp);
+    $("#tempForcast4").append("Temp: "+temp+" °F");
     $("#fourthDay").append("<p id='humidForcast4'></p>");
     $("#humidForcast4").append("Humidity: "+humidity+"%");
 
@@ -153,7 +162,7 @@ $.ajax({
     $("#fithDay").append("<h4 id='date5'></h4>");
     $("#date5").text(date);
     $("#fithDay").append("<p id='tempForcast5'></p>");
-    $("#tempForcast5").append("Temp: "+temp);
+    $("#tempForcast5").append("Temp: "+temp+" °F");
     $("#fithDay").append("<p id='humidForcast5'></p>");
     $("#humidForcast5").append("Humidity: "+humidity+"%");
     
