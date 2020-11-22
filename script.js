@@ -9,6 +9,13 @@ var sun = "Assests/sun.PNG";
 var rain ="Assests/drop.PNG";
 var cloud ="Assests/cloud.PNG";
 var snow = "Assests/snowflake.PNG"
+
+var sunB = "Assests/sunB.PNG";
+var rainB ="Assests/dropB.PNG";
+var cloudB ="Assests/cloudB.PNG";
+var snowB = "Assests/snowflakeB.PNG"
+
+
 if(city === null || undefined){
     city = "Columbus";
 } else{
@@ -63,16 +70,39 @@ $.ajax({
   method:"GET"
 }).then(function(response){
 
-    //console.log(response);
+    console.log(response);
     var cityName = response.name;
     let humidity = response.main.humidity;
     let temp = response.main.temp;
     let windSpeed = response.wind.speed;
     lat = response.coord.lat;
     lon = response.coord.lon;
+    let weather = response.weather[0].main;
+    console.log(weather);
+
+     //Logic for adding icons
+     if(weather.toString() === "Clouds"){
+        //console.log("itClouds");
+        weather = cloudB;
+    }
+    else if(weather.toString() === "Clear"){
+       // console.log("itclear");
+        weather = sunB;
+    }
+    else if(weather.toString() === "Rain"){
+        //console.log("itRain");
+        weather = rainB;
+    }
+    else if(weather.toString() === "Snow"){
+        weather = snowB;
+    }
 
     $("#Today").append("<h3 id='cityname'></h3>");
     $("#cityname").text(cityName);
+
+    $("#TodayRow").append("<img id='weatherToday'></img>");
+    $("#weatherToday").attr("src", weather);
+    $("#weatherToday").addClass("col-2");
 
     $("#Today").append("<p id='temp'></p>");
     $("#temp").text("Temp: "+temp+" °F");
