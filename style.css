@@ -7,18 +7,27 @@
 }
 
 .currentDayCard{
+    background-color: lightgray;
     border-style: dashed;
     margin-bottom: 20px;
 }
 
 .severe{
     color: red;
+    font-weight: bold;
 }
 
 .moderate{
     color: orange;
+    font-weight: bold;
 }
 
 .mild{
     color: green;
+    font-weight: bold;
+}
+
+p{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
 }
