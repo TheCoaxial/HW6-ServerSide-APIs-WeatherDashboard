@@ -50,7 +50,7 @@ $("#search").click(function(){
 console.log(stateCode);
 
 function currentDay(){
-    var currentdayURL = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
+    var currentdayURL = "https://api.openweathermap.org/data/2.5/weather?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
 $.ajax({
   url: currentdayURL,
   method:"GET"
@@ -76,7 +76,7 @@ $.ajax({
     $("#Today").append("<p id='windSpeed'></p>");
     $("#windSpeed").text("Windspeed :"+windSpeed+"MPH");
     
-     uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid=a4f1da209176afa0326f9cbeeaa0df17"
+     uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid=a4f1da209176afa0326f9cbeeaa0df17"
 
      $.ajax({
         url: uvURL,
@@ -101,7 +101,7 @@ $.ajax({
 
 
 function forCast(){
-    var forcastByCityName = "http://api.openweathermap.org/data/2.5/forecast?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
+    var forcastByCityName = "https://api.openweathermap.org/data/2.5/forecast?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
 
 $.ajax({
     url: forcastByCityName,
