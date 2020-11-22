@@ -114,7 +114,22 @@ $.ajax({
         date = date.substring(0,10);
         temp = response.list[i].main.temp;
         humidity =response.list[i].main.humidity;
-        // console.log(response);
+        weather = response.list[i].weather[0].main;
+
+        //Logic for adding icons
+        // if(weather.toString() === "Clouds"){
+        //     console.log("itClouds");
+        //     weather = (link to image);
+        // }
+        // else if(weather.toString() === "Clear"){
+        //     console.log("itclear");
+        // }
+        // else if(weather.toString() === "Rain"){
+        //     console.log("itRain");
+        // }
+
+        console.log(weather);
+        //console.log(response);
         // console.log(date);
         //console.log(temp);
         // console.log(humidity);
@@ -129,6 +144,8 @@ $.ajax({
     $("#tempForcast1").append("Temp: "+temp+" °F");
     $("#firstDay").append("<p id='humidForcast1'></p>");
     $("#humidForcast1").append("Humidity: "+humidity+"%");
+    $("#firstDay").append("<p id= 'weather'></p");
+    $("#weather").append(weather+" Placeholder");
 
     displayForcast(8);
 
@@ -138,6 +155,8 @@ $.ajax({
     $("#tempForcast2").append("Temp: "+temp+" °F");
     $("#secondDay").append("<p id='humidForcast2'></p>");
     $("#humidForcast2").append("Humidity: "+humidity+"%");
+    $("#secondDay").append("<p id= 'weather2'></p");
+    $("#weather2").append(weather+" Placeholder");
     
     displayForcast(17);
 
@@ -147,6 +166,8 @@ $.ajax({
     $("#tempForcast3").append("Temp: "+temp+" °F");
     $("#thirdDay").append("<p id='humidForcast3'></p>");
     $("#humidForcast3").append("Humidity: "+humidity+"%");
+    $("#thirdDay").append("<p id= 'weather3'></p");
+    $("#weather3").append(weather+" Placeholder");
 
     displayForcast(26);
 
@@ -156,6 +177,8 @@ $.ajax({
     $("#tempForcast4").append("Temp: "+temp+" °F");
     $("#fourthDay").append("<p id='humidForcast4'></p>");
     $("#humidForcast4").append("Humidity: "+humidity+"%");
+    $("#fourthDay").append("<p id= 'weather4'></p");
+    $("#weather4").append(weather+" Placeholder");
 
     displayForcast(35);
 
@@ -165,6 +188,8 @@ $.ajax({
     $("#tempForcast5").append("Temp: "+temp+" °F");
     $("#fithDay").append("<p id='humidForcast5'></p>");
     $("#humidForcast5").append("Humidity: "+humidity+"%");
+    $("#fithDay").append("<p id= 'weather5'></p");
+    $("#weather5").append(weather+" Placeholder");
     
      //console.log(response);
     // console.log(date);
