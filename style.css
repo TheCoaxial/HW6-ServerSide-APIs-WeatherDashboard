@@ -3,6 +3,7 @@
 .forecastCard{
     background-color: lightblue;
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .currentDayCard{
@@ -15,7 +16,7 @@
 }
 
 .moderate{
-    color: yellow;
+    color: orange;
 }
 
 .mild{
