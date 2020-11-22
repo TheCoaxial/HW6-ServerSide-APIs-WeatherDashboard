@@ -1,0 +1,23 @@
+
+
+.forecastCard{
+    background-color: lightblue;
+    margin-left: 20px;
+}
+
+.currentDayCard{
+    border-style: dashed;
+    margin-bottom: 20px;
+}
+
+.severe{
+    color: red;
+}
+
+.moderate{
+    color: yellow;
+}
+
+.mild{
+    color: green;
+}
