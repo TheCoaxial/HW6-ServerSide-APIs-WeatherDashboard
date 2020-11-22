@@ -1,6 +1,6 @@
 
 
-
+//Declaring Globals
 var city = "";
 var stateCode = "";
 var recentCity = [];
@@ -11,7 +11,7 @@ if(city === null || undefined){
 } else{
     city = localStorage.getItem("city");
 }
-console.log(city);
+
 
 if(stateCode === null || undefined){
     stateCode = "oh";
@@ -25,30 +25,34 @@ var lat = 0;
 var lon = 0;
 var uvURL ="";
 
+//wrapped the bulk of the page in a .ready function
 $(document).ready(function(){
 
+//call functions once to populate the page
 currentDay();
 forCast();
 
+// logic for the search button
 $("#search").click(function(){
-     console.log("I ran");
+     //console.log("I ran");
     userInput = $("#searchInput").val();
-     console.log(userInput);
+     //console.log(userInput);
     queryArray = userInput.split(',');
-    console.log(queryArray);
+    //console.log(queryArray);
     localStorage.setItem("city", queryArray[0]);
     localStorage.setItem("stateCode", queryArray[1]);
     city = queryArray[0].trim();
     stateCode = queryArray[1];
+    //empty the selected elements then redraw them
     $("p").empty();
     $("h3").empty();
-    // event.preventDefault();
+   
     currentDay();
     forCast();
 
 })
-console.log(stateCode);
 
+//wrapped the ajax call for current day conditions in a function
 function currentDay(){
     var currentdayURL = "https://api.openweathermap.org/data/2.5/weather?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
 $.ajax({
@@ -76,8 +80,9 @@ $.ajax({
     $("#Today").append("<p id='windSpeed'></p>");
     $("#windSpeed").text("Windspeed :"+windSpeed+"MPH");
     
-     uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid=a4f1da209176afa0326f9cbeeaa0df17"
 
+     uvURL = "https://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid=a4f1da209176afa0326f9cbeeaa0df17"
+// opted to make the uv ajax call inside of the currentday ajax since it needs information from this anyway
      $.ajax({
         url: uvURL,
         method:"GET"
@@ -100,6 +105,7 @@ $.ajax({
 }
 
 
+//function to make an ajaxcall for the forcast
 function forCast(){
     var forcastByCityName = "https://api.openweathermap.org/data/2.5/forecast?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
 
@@ -108,7 +114,7 @@ $.ajax({
     method:"GET"
   }).then(function(response){
   
-
+//function to collect date from ajax call
     function displayForcast(i){
         date = response.list[i].dt_txt;
         date = date.substring(0,10);
@@ -136,6 +142,7 @@ $.ajax({
     
       }
 
+//Still needs refactoring/ call the nessnecessary info then populate the appropriate places
     displayForcast(0);
 
     $("#firstDay").append("<h4 id='date1'></h4>");
