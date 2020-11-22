@@ -3,50 +3,67 @@
 
 var city = "";
 var stateCode = "";
+var recentCity = [];
+var recentState = [];
 
 if(city === null || undefined){
-    city = Columbus;
+    city = "Columbus";
 } else{
     city = localStorage.getItem("city");
 }
 console.log(city);
 
 if(stateCode === null || undefined){
-    stateCode = oh;
+    stateCode = "oh";
 } else {
     stateCode = localStorage.getItem("stateCode");
 }
 
-var currentdayURL = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+stateCode+",us&appid=a4f1da209176afa0326f9cbeeaa0df17"
+var queryArray =[];
+var userInput;
+var lat = 0;
+var lon = 0;
+var uvURL ="";
 
-var forcastByCityName = "http://api.openweathermap.org/data/2.5/forecast?q="+city+","+stateCode+",us&appid=a4f1da209176afa0326f9cbeeaa0df17"
+$(document).ready(function(){
 
-
+currentDay();
+forCast();
 
 $("#search").click(function(){
-    
-    var userInput = $("#searchInput").val();
-    console.log(userInput);
-    var queryArray = userInput.split(',');
+     console.log("I ran");
+    userInput = $("#searchInput").val();
+     console.log(userInput);
+    queryArray = userInput.split(',');
     console.log(queryArray);
     localStorage.setItem("city", queryArray[0]);
     localStorage.setItem("stateCode", queryArray[1]);
-    
+    city = queryArray[0].trim();
+    stateCode = queryArray[1];
+    $("p").empty();
+    $("h3").empty();
+    // event.preventDefault();
+    currentDay();
+    forCast();
 
 })
+console.log(stateCode);
 
-
-
+function currentDay(){
+    var currentdayURL = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
 $.ajax({
   url: currentdayURL,
   method:"GET"
 }).then(function(response){
 
-    console.log(response);
+    //console.log(response);
     var cityName = response.name;
     let humidity = response.main.humidity;
     let temp = response.main.temp;
     let windSpeed = response.wind.speed;
+    lat = response.coord.lat;
+    lon = response.coord.lon;
+
     $("#Today").append("<h3 id='cityname'></h3>");
     $("#cityname").text(cityName);
 
@@ -58,9 +75,25 @@ $.ajax({
 
     $("#Today").append("<p id='windSpeed'></p>");
     $("#windSpeed").text("Windspeed :"+windSpeed+"MPH");
+    
+     uvURL = "http://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid=a4f1da209176afa0326f9cbeeaa0df17"
+
+     $.ajax({
+        url: uvURL,
+        method:"GET"
+      }).then(function(response){
+          uvIndex = response.value;
+        console.log(response);
+        $("#Today").append("<p id='uv'></p>");
+        $("#uv").text("UV :"+uvIndex);
+    })
 
 })
+}
 
+
+function forCast(){
+    var forcastByCityName = "http://api.openweathermap.org/data/2.5/forecast?q="+city+","+stateCode+",us&units=imperial&appid=a4f1da209176afa0326f9cbeeaa0df17"
 
 $.ajax({
     url: forcastByCityName,
@@ -72,10 +105,10 @@ $.ajax({
         date = response.list[i].dt_txt;
         temp = response.list[i].main.temp;
         humidity =response.list[i].main.humidity;
-        console.log(response);
-        console.log(date);
-        console.log(temp);
-        console.log(humidity);
+        // console.log(response);
+        // console.log(date);
+        //console.log(temp);
+        // console.log(humidity);
     
       }
 
@@ -124,20 +157,19 @@ $.ajax({
     $("#fithDay").append("<p id='humidForcast5'></p>");
     $("#humidForcast5").append("Humidity: "+humidity+"%");
     
-    console.log(response);
-    console.log(date);
-    console.log(temp);
-    console.log(humidity);
-
-
-  
+     //console.log(response);
+    // console.log(date);
+    // console.log(temp);
+    // console.log(humidity);
   })
 
 
-  function displayForcast(i){
-    date = response.list[i].dt_txt;
-    temp = response.list[i].main.temp;
-    humidity =response.list[i].main.humidity;
-    
 
-  }
+
+
+
+}
+
+
+  
+})
