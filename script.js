@@ -5,15 +5,15 @@ var city = "";
 var stateCode = "";
 var recentCity = [];
 var recentState = [];
-var sun = "Assests/sun.PNG";
-var rain ="Assests/drop.PNG";
-var cloud ="Assests/cloud.PNG";
-var snow = "Assests/snowflake.PNG"
+var sun = "Assests/sun.png";
+var rain ="Assests/drop.png";
+var cloud ="Assests/cloud.png";
+var snow = "Assests/snowflake.png"
 
-var sunB = "Assests/sunB.PNG";
-var rainB ="Assests/dropB.PNG";
-var cloudB ="Assests/cloudB.PNG";
-var snowB = "Assests/snowflakeB.PNG"
+var sunB = "Assests/sunB.png";
+var rainB ="Assests/dropB.png";
+var cloudB ="Assests/cloudB.png";
+var snowB = "Assests/snowflakeB.png"
 
 
 if(city === null || undefined){
